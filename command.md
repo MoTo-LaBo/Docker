@@ -15,11 +15,11 @@ Docker command
     exit
 ### 6. exit した場合の docker container 起動
      docker restart <name 又は ID>
-> ※ 基本は exit を使用する
 ### 5-1. detach : を使用して Host に戻る
 - detach : ctrl + p+q 同時押し
 ### 6-1. detach を使用した時は、 attach で再度入る
     docker attach <container>
+> ※ 基本は exit を使用する
 ### 7. container  (os)作業に戻る
     docker exec -it <container> bash
 ### コンテナを表示(アクティブなモノだけ) ※ process status の略
@@ -34,7 +34,7 @@ Docker command
 > ※ image と repository 名は一致していないといけない
 ### なんで image 名を repository 名に合わせるのか？
 - docker は１つの image に対して１つの repository が対応
-   - docker は image を push する時に image の名前をみて push 先を決める
+- docker は image を push する時に image の名前をみて push 先を決める
 ### image 名変更
     docker tag <source><target>
 - 例）docker tag ubuntu:updated < user name>/my-first-repo
