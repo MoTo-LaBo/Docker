@@ -48,7 +48,8 @@
     docker commit <container> <new image>
 ## new docker image を docker hub へ push する
 - その前に docker hub で 自分の repository を作成
-- 新しい image に対して 1つの repository を作成。 image / repository は１つずつだが tag 別に色々な種類の image を保存している
+- 新しい image に対して 1つの repository を作成
+   - image / repository は１つずつだが tag 別に色々な種類の image を保存している
 ### image 名
 - repository名 : tag 名 = image 名
    - tag 名 を指定しない場合は default で latest になる
@@ -56,20 +57,20 @@
    - library/ubuntu : latest = ubuntu image 名
 > ※ image と repository 名は一致していないといけない
 ### なんで image 名を repository 名に合わせるのか？
-- docker は１つの image に対して１つの repository が対応。docker は image を push する時に image の名前をみて push 先を決めるので
+- docker は１つの image に対して１つの repository が対応。docker は image を push する時に image の名前をみて push 先を決める
 ### image 名変更
     docker tag <source><target>
 - 例）docker tag ubuntu:updated < user name>/my-first-repo
 ### 他の場所へ push する場合
 - 他の場所へpush する場合は < host name >:< port > を送信先のもに設定して push する
 ### image name 構成
-< host name >:< port >/< username >/< repository >:< tag >
+`< host name >:< port >/< username >/< repository >:< tag >`
 - default の設定
    - < hostname >:< port > → registry-1.docker.io
    - < username >  　　　　→ library
    - < tag > 　　　　　　 　 → latest
 #### 正式な repository の name
-regirstry-1.docker.io/library/ubuntu:latest
+`regirstry-1.docker.io/library/ubuntu:latest`
 ### docker hub に push する
     docker push <image>
 ### docker image を pull する
