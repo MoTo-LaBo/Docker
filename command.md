@@ -15,8 +15,7 @@ Docker command
     exit
 ### 6. exit した場合の docker container 起動
      docker restart <name 又は ID>
-- コマンド起動
-#### 基本は exit を使用 detach を使用した場合
+> ※ 基本は exit を使用する
 ### 5-1. detach : を使用して Host に戻る
 - detach : ctrl + p+q 同時押し
 ### 6-1. detach を使用した時は、 attach で再度入る
