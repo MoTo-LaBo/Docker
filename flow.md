@@ -1,9 +1,9 @@
 # Docker flow
 ### 1. docker hub に login
     docker login
-- username 入力
-- password 入力
-- Login Succeeded の表示で完了
+1. username 入力
+2. password 入力
+3. Login Succeeded の表示で完了
 > ※ インターネットに繋がってないと login できない！！
 ### 2. docker pull で image を pull してくる
     docker pull
@@ -21,22 +21,22 @@
     docker ps
 #### 全ての docker container を表示
     docker ps -a
-### 6. Container 作成
+### 6. Container 作成 bash で操作
     docker run -it ubuntu bash
 - docker container の中に (os)ubuntu (shell)bash の環境を構築
 - 普通ならもっと色々と付け加えていく
-### 7. touch < test >
+### 7. touch < test file > 作成
     touch < test >
-### 8. exit command を使用して Host に戻った
+### 8. exit command を使用して Host に戻る
     exit
-### 9. exit した docker container 起動
+### 9. exit した場合の docker container 起動
      docker restart <name 又は ID>
 - コマンド起動
 ### 10. container  (os)作業に戻る
     docker exec -it <container> bash
-### 11. detach : を使用して Host に戻る
+### 8-1. detach : を使用して Host に戻る
 - detach : ctrl + p+q 同時押し
-### 12. detach を使用した時は、 attach で再度入る
+### 9-1. detach を使用した時は、 attach で再度入る
     docker attach <container>
 ## detach と exit の違い
 ### exit
