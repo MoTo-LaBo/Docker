@@ -1,4 +1,7 @@
 # Docker flow
+docker registry = docker image を保存している場所
+- image は container の元になるもの
+- docker hub は docker registry の１つ
 ### 1. docker hub に login
     docker login
 1. username 入力
@@ -57,7 +60,8 @@
    - library/ubuntu : latest = ubuntu image 名
 > ※ image と repository 名は一致していないといけない
 ### なんで image 名を repository 名に合わせるのか？
-- docker は１つの image に対して１つの repository が対応。docker は image を push する時に image の名前をみて push 先を決める
+- docker は１つの image に対して１つの repository が対応
+   - docker は image を push する時に image の名前をみて push 先を決める
 ### image 名変更
     docker tag <source><target>
 - 例）docker tag ubuntu:updated < user name>/my-first-repo
