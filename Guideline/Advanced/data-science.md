@@ -119,4 +119,14 @@
 - browser を開く
   - localhost:8888 にaccess
   - Jupyter lab に access できる
-## 7.
+### Jupyter lab アプリケーションが立ち上がる！
+- ctrl + c で一度止める
+  - host に戻る
+## 7.Container から Host の file system に access (mount)
+- build context (directory)に python code 用の directory を作成する
+- -v (option)を使用して mount する
+#### mount
+    docker run -p 8888:8888 -v ~/Desktop/ds_python:/work --name my-lab <image>
+- browser で `localhost:8888` に access する
+- /work はまだ 作成していないが、上記のコマンド入力時に、記述しておけば container に自動で directory が作成される
+- container に名前を付けておく `--name`
