@@ -82,7 +82,31 @@
 - -b -p を使うことによって、インタラクティブなやりとりを避ける事ができる
 #### 5.
     sh /opt/Anaconda3-2021.05-Linux-x86_64.sh -b -p /opt/Anaconda3
+### 5. Dockerfile 記述
+    FROM ubuntu:latest
+    RUN apt-get update && apt-get install -y \
+        sudo \
+        wget \
+        vim
+    WORKDIR /opt
+    RUN wget https://repo.continuum.io/archive/Anaconda3-2021.05-Linux-x86_64.sh && \
+    sh Anaconda3-2021.05-Linux-x86_64.sh -b -p /opt/anaconda3 && \
+    rm -f Anaconda3-2021.05-Linux-x86_64.sh
 
+    ENV PATH /opt/anaconda3/bin:$PATH
 
-
-
+    RUN pip install --upgrade pip
+    WORKDIR /
+    CMD ["jupyter","lab","--ip=0.0.0.0","--allow-root","--LabApp.token=''"]
+- -d
+  - batch mode : バッチモードでインストールを実行する（`手動での操作は不要`）
+- -p
+  - install 先の PATH 指定 /optの下に(共有の為によく使用される)
+- rm -f
+  - installer を削除。ANACONDA3を install できればO K。 docker image 容量を削減の為にここで自動化して削除してしまう
+  - -f : warning が出て確認で止まらないように、強制的に削除する
+- ENV PATH <新しいPATH>:$PATH(今設定されているPATHに)
+- package を管理する Tool pip(ピップ)
+  - python の package 管理 tool
+  - upgrade する
+- WORKDIR /(root)に戻る。root から開始できる
