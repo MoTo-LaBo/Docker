@@ -8,15 +8,15 @@
 - Host
   - Dockerfile
   - code
-### 1. build context 作成
+## 1. build context 作成
     mkdir dsenv_biuld
 - dsenv_biuld の directory 作成
   - data science environment creation
   - (データサイエンスの環境構築)
-### 2. directory の中で Dockerfile 作成
+## 2. directory の中で Dockerfile 作成
     code . Dockerfile
 - vs code で Dockerfile 編集
-### 3. Dockerfile に記述
+## 3. Dockerfile に記述
     FROM ubuntu:latest
     RUN apt-get update && apt-get install -y \
             sudo \
@@ -41,7 +41,7 @@
   - https://repo.continuum.io/archive/以下にある`Anaconda3-2021.05-Linux-x86_64.sh` を自分の install したい ver に修正する
   - そして、 docker build → container
   - 上記だけで、ver の変更ができる
-### 4. ANACONDA の installer を使用して install する
+## 4. ANACONDA の installer を使用して install する
 1. container に入って ANACONDA を install してみる
 2. やり方がわかったら、改めてやり方を Dockerfile に記述していく
 - Dockerfile を書いていく時は、最初からどういう事を記述していけばいいか分からない事が多い
@@ -82,7 +82,7 @@
 - -b -p を使うことによって、インタラクティブなやりとりを避ける事ができる
 #### 5.
     sh /opt/Anaconda3-2021.05-Linux-x86_64.sh -b -p /opt/Anaconda3
-### 5. Dockerfile 記述
+## 5. Dockerfile 記述
     FROM ubuntu:latest
     RUN apt-get update && apt-get install -y \
         sudo \
@@ -110,3 +110,13 @@
   - python の package 管理 tool
   - upgrade する
 - WORKDIR /(root)に戻る。root から開始できる
+## 6. docker build . & docker run
+    docker build .
+- docker image を作成
+### docker run
+    docker run -p 8888:8888 <docker image ID>
+- default で設定した Jupyter lab が動作している
+- browser を開く
+  - localhost:8888 にaccess
+  - Jupyter lab に access できる
+## 7.
