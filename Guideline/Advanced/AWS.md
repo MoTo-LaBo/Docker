@@ -62,3 +62,46 @@
 #### 一度 ログアウトして、またログイン
     docker images
 - そうすると、sudo を付けなくても docker コマンドが使用できるようになっている
+## EC2 に　Docker image/Dockerfile を送る
+1. Docker レジストリを使う
+   - loacl から Docker image を Docker Hub に push する
+   - AWS 側で pull する
+   - 業務で一番多いやり方。Docker のレジストリを用意していれば一番やりやすいやり方
+2. Dockerfile を送る
+   - 送った先で build する → Docker image → container
+   - このやり方だと build context が変わる可能性がある
+   - local と全く同じ Docker image を作れるとは限らない
+   - build context の内容も使用する container だと、build context の内容が変われば、 container の内容も必然的に変わる
+   - スリムなやり方、Docker image はどうしても容量が大きく重たくなってしまう。Dockerfile は、txttfile なので容量も小さく軽く送る事ができる
+3. Docker image を tar にして送る
+   - Docker image. tar (圧縮file) それを送る
+   - サイズを小さくして送りたい為
+   - このやり方だと、別 server(docker hub)を介さずに EC2(AWS)に直接送る事ができる
+### どういう時に tar にして送るか?
+- data が重要な個人情報を持っているdataで、serverはかなり secure な server でなければならない。access 制限がかなり厳しくなっていて、他のインターネットや server に access できなくなる事が多い
+- 医療 data ect...
+- そういうケースではない時は、1. 2. を使用することが多い
+## Dockrfile を tar にして送る
+### 1. dockerfile 作成 → docker image を作成
+    docker build .
+### 2. docker image を tar file にする
+    docker save 10b329d > myimage.tar
+- 上記のコマンドで tar file が作成される
+- $ docker save (image ID) > (file 名).tar
+### 3. SFTP : Secure File Transfer Protocol
+#### 1. SFTP を使って tar file を EC2(aws)へ upload する
+    sftp -i mydocker.pem ubuntu@<hostname>
+- SSH は shell を使うためのもの SFTP は file を transfer(転送) させるもの
+#### 2. EC2 server へ送る
+    put local/path [remote path]
+- $ put temp_folder/myimage.tar home/ubuntu
+#### 3. EC2 server から data をとってくる
+    get remote/path [local/path]
+- $ get something
+#### 4. EC2 で tar file を docker image → container に変換
+##### 1. SSHログイン
+    ssh -i mydocker.pem ubuntu@hostname.amazonaws.com
+##### 2. tar file を docker image に変換
+    docker load < myimage.tar
+##### 3. container を作成
+    docker run -it myimage bash
